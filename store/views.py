@@ -3,15 +3,21 @@ from django.http import HttpResponse
 from .models import Producent
 # Create your views here.
 
-def raports(request):
+
+def reports(request):
     lista_producentow = Producent.objects.order_by('idproducent')
-    output = ', '.join([p.nazwa for p in lista_producentow])
-    return HttpResponse(output, )
-    # return render(request, 'store/raports.html', context)
+    # output = ', '.join([p.nazwa for p in lista_producentow])
+    context = {}
+    return render(request, 'store/reports.html', context)
+
+def generate_raports(request):
+    context = {}
+    return render(request, 'store/generate_report.html', context)
 
 def managements(request):
     context = {}
     return render(request, 'store/management.html', context)
+
 
 def store(request):
     context = {}
