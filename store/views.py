@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Uzytkownik
 from .models import Producent
 from .models import Produkt
+from .models import Zamowienie
 
 # Create your views here.
 
@@ -22,6 +23,11 @@ def generate_raports(request):
 
 
 def managements(request):
+    context = {}
+    return render(request, 'store/management.html', context)
+
+
+def magazyn(request):
     query = '''
     SELECT
         produkt.idProdukt AS idProdukt,
@@ -39,8 +45,18 @@ def managements(request):
         NOT produkt.CzyArchiwalny
     '''
     context = {'products': Produkt.objects.raw(query)}
-    return render(request, 'store/management.html', context)
+    return render(request, 'store/magazyn.html', context)
 
+
+def zamowienia_klientow(request):
+    query = 'SELECT * FROM podsumowanie_zamowien_klientow_v'
+    context = {'zamowienia_klientow': Zamowienie.objects.raw(query)}
+    return render(request, 'store/zamowienia_klientow.html', context)
+
+
+def zamowienia_magazynu(request):
+    context = {}
+    return render(request, 'store/zamowienia_magazynu.html', context)
 
 def store(request):
     context = {}

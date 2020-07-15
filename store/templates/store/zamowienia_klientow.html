@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zamowienia</title>
+    {% load static %}
+    <script src="{% static 'store/sorttable.js' %}" type="text/javascript"></script>
+</head>
+<body>
+    <h1>Magazyn</h1>
+    <table>
+        <tr>
+            <td>
+                <form action='./magazyn' method='GET'>
+                    <button type="submit">Magazyn</button>
+                </form>
+            </td>
+            <td>
+                <form action='./zamowienia_klientow' method='GET'>
+                    <button type="submit">Zamowienia</button>
+                </form>
+            </td>
+            <td>
+                <form action='./zamowienia_magazynu' method='GET'>
+                    <button type="submit">Zamowienia magazynu</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <table border="1" width="600" class="sortable">
+        <thead>
+        <tr>
+            <th>Kwota</th>
+            <th>Stan</th>
+            <th>Data Złożenia</th>
+            <th>Data Skompletowania</th>
+            <th>Czy opłacone</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for z in zamowienia_klientow %}
+            <tr>
+                <td>{{ z.kwota }}</td>
+                <td>{{ z.stan }}</td>
+                <td>{{ z.dataZlozenia }}</td>
+                <td>{{ z.dataSkompletowania }}</td>
+                <td>{{ z.czyOplacone }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
