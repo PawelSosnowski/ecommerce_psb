@@ -5,17 +5,40 @@
     <title>Reports</title>
 <style>
     button{
-  width: 100px;
+  width: 80px;
   height: 40px;
   object-fit: none;
   object-position: 50% 50%;
 }
+
 </style>
 </head>
 <body>
-<h3>You generate reports here</h3>
+<h3>Wygeneruj raport</h3>
+<h2>Zakres:</h2>
+
+<label class="container">Tydzien
+  <input type="radio" checked="checked" name="radio">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">Miesiac
+  <input type="radio" name="radio">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">3 Miesiace
+  <input type="radio" name="radio">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">Rok
+  <input type="radio" name="radio">
+  <span class="checkmark"></span>
+</label>
+
 <form action='actionUrl' method='GET'>
-<button type="submit">report!</button>
+<button type="submit">raport!</button>
 </form>
 
 </body>

@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>G</title>
+    {% load static %}
+    <script>
+    </script>
 </head>
 <body>
 <h3>Generated reports</h3>
+
+<table border="1" width="600" class="sortable">
+<tr>
+<td>Imie</td>
+<td>Nazwisko</td>
+<td>Email</td>
+<td>Zamowienia</td>
+<td>Suma wydatkow</td>
+</tr>
+
+{% for record in uzytkownicy %}
+<tr>
+<td>{{ record.imie }}</td>
+<td>{{ record.nazwisko }}</td>
+<td>{{ record.email }}</td>
+<td>{{ record.LiczbaZamowien }}</td>
+<td>{{ "none" }}</td>
+</tr>
+{% endfor %}
+</table>
+
+
 </body>
 </html>
