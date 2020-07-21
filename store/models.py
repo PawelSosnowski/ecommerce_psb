@@ -114,3 +114,15 @@ class ZamowienieMagazynu(models.Model):
     class Meta:
         managed = True
         db_table = 'zamowienie_magazynu'
+
+
+class Magazyn(models.Model):
+    idProdukt = models.IntegerField(db_column='idProdukt', primary_key=True)
+    produktNazwa = models.CharField(db_column='produktNazwa', max_length=45, blank=True, null=True)
+    kategoriaNazwa = models.CharField(db_column='kategoriaNazwa', max_length=45, blank=True, null=True)
+    producentNazwa = models.CharField(db_column='producentNazwa', max_length=45, blank=True, null=True)
+    ilosc = models.IntegerField(db_column='ilosc', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'magazyn_v'
