@@ -45,15 +45,6 @@
                 <td>{{ z.dataZlozenia }}</td>
                 <td>{{ z.dataSkompletowania }}</td>
                 <td>{{ z.czyOplacone }}</td>
-                <td>
-                    <form action='./zamowienia_magazynu' method='POST'>
-                        {% csrf_token %}
-                        <label for="dupa">First name:</label>
-                        <input type="hidden" id="dupa" name="dupa" value="1"><br><br>
-                        <input type="submit" value="dupa">
-                        <button type="submit">Zamowienia magazynu</button>
-                    </form>
-                </td>
             </tr>
             {% endfor %}
         </tbody>

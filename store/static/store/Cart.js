@@ -8,18 +8,15 @@ class Cart
 
   addItem(itemID)
   {
-    console.log(itemID);
     if(itemID in this.items)
       this.items[itemID] += 1;
     else
       this.items[itemID] = 1;
-
-    console.log(this);
   }
 
 };
 
-let cart = new Cart(1);
+var cart = new Cart(1);
 
 var table = document.getElementById("product_table");
 var tableHeader = table.appendChild(document.createElement("thead"));
@@ -58,4 +55,3 @@ for(let i = 0; i < products.length; i++ )
   button.innerHTML = "Dodaj";
   button.onclick = () => cart.addItem(itemID);
 }
-let button = document.getElementById("zamow");

@@ -30,19 +30,17 @@
     <table border="1" width="600" class="sortable">
         <thead>
         <tr>
-            <th>Nazwa</th>
-            <th>Kategoria</th>
-            <th>Producent</th>
-            <th>Ilosc na magazynie</th>
+            <th>Numer zamówienia</th>
+            <th>Wartość zamówienia</th>
+            <th>Ilość sztuk</th>
         </tr>
         </thead>
         <tbody>
-            {% for product in products %}
+            {% for z in zamowienia %}
             <tr>
-                <td>{{ product.produktNazwa }}</td>
-                <td>{{ product.kategoriaNazwa }}</td>
-                <td>{{ product.producentNazwa }}</td>
-                <td>{{ product.ilosc }}</td>
+                <td>{{ z.nrZamowienia }}</td>
+                <td>{{ z.wartoscZamowienia }}</td>
+                <td>{{ z.liczbaSztuk }}</td>
             </tr>
             {% endfor %}
         </tbody>

@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'sklep_internetowy',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.0.16',
+        'HOST': '192.168.0.108',
         'PORT': '3306',
     }
 }

@@ -78,7 +78,14 @@ class ZamowieniaProdukty(models.Model):
     idzamowienia = models.OneToOneField('Zamowienie', models.DO_NOTHING, db_column='idZamowienia', primary_key=True)
     idzamowionegoproduktu = models.ForeignKey(Produkt, models.DO_NOTHING, db_column='idZamowionegoProduktu')
     liczbasztuk = models.IntegerField(db_column='LiczbaSztuk', blank=True, null=True)
-    cena = models.FloatField(db_column='Cena', blank=True, null=True)
+    # cena = models.FloatField(db_column='Cena', blank=True, null=True)
+
+    @classmethod
+    def create(cls, idZamowienia, idProduktu, liczbaSztuk):
+        instance = cls(idzamowienia=idZamowienia,
+                       idzamowionegoproduktu=idProduktu,
+                       liczbasztuk=liczbaSztuk)
+        return instance
 
     class Meta:
         managed = True
@@ -87,7 +94,7 @@ class ZamowieniaProdukty(models.Model):
 
 
 class Zamowienie(models.Model):
-    idzamowienia = models.IntegerField(db_column='idZamowienia', primary_key=True)
+    idzamowienia = models.AutoField(db_column='idZamowienia', primary_key=True)
     cena = models.FloatField(db_column='Cena', blank=True, null=True)
     stan = models.CharField(db_column='Stan', max_length=45, blank=True, null=True)
     datazlozenia = models.DateTimeField(db_column='DataZlozenia', blank=True, null=True)
@@ -126,3 +133,14 @@ class Magazyn(models.Model):
     class Meta:
         managed = False
         db_table = 'magazyn_v'
+
+
+class PodsumowanieZamowienMagazynu(models.Model):
+    idZamowienia = models.ForeignKey(ZamowienieMagazynu, models.DO_NOTHING, db_column='idZamowienia', primary_key=True)
+    nrZamowienia = models.IntegerField(db_column='nrZamowienia')
+    wartoscZamowienia = models.IntegerField(db_column='wartoscZamowienia')
+    liczbaSztuk = models.IntegerField(db_column='liczbaSztuk')
+
+    class Meta:
+        managed = False
+        db_table = 'podsumowanie_zamowien_magazynu_v'

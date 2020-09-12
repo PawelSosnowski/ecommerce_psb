@@ -28,16 +28,7 @@
             </td>
         </tr>
     </table>
-    <table id="product_table" border="1" width="600"></table>
-    <script type="text/javascript">
-        var products = {{products_json|safe}};
-        console.log(products);
-    </script>
-    {% load static %}
-    <script src="{% static 'store/Cart.js' %}" type="text/javascript"></script>
-    <form action=./zamow method="POST">
-        <button id="zamow">Złóż zamówienie</button>
-    </form>
+
     <table border="1" width="600" class="sortable">
         <thead>
         <tr>
