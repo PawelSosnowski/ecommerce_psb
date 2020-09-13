@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reports</title>
+    <title>Zamowienia</title>
 <style>
     button{
   width: 80px;
@@ -35,8 +35,7 @@
     </tr>
 </table>
 
-
-<h2>Raport klienci</h2>
+<h2>Raport zamowienia</h2>
 
 <h3>Zakres dat:</h3>
 
@@ -60,7 +59,19 @@
   <span class="checkmark"></span>
 </label>
 
-<form action='actionUrl' method='GET'>
+<h3>Grupowanie:</h3>
+
+<label class="container">Kategoria
+  <input type="radio" checked="checked" name="group">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">Producent
+  <input type="radio" name="group">
+  <span class="checkmark"></span>
+</label>
+
+<form action="generateOrders" method='GET'>
 <button type="submit">Generuj raport!</button>
 </form>
 

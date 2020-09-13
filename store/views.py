@@ -17,17 +17,36 @@ from .models import Store
 
 
 def reports(request):
-    lista_producentow = Producent.objects.order_by('idproducent')
+    # lista_producentow = Producent.objects.order_by('idproducent')
     # output = ', '.join([p.nazwa for p in lista_producentow])
     return render(request, 'store/reports.html')
 
+def reports_orders(request):
+    # lista_producentow = Producent.objects.order_by('idproducent')
+    # output = ', '.join([p.nazwa for p in lista_producentow])
+    return render(request, 'store/report_order.html')
 
+def reports_warehouse(request):
+    # lista_producentow = Producent.objects.order_by('idproducent')
+    # output = ', '.join([p.nazwa for p in lista_producentow])
+    return render(request,'store/report_warehouse.html')
+
+def generate_raports(request):
+    lista_uzytkownikow = Uzytkownik.objects.raw('''SELECT idUzytkownik, Imie, Nazwisko, Email, 
+                                                ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba''')
 def generate_raports(request):
     lista_uzytkownikow = Uzytkownik.objects.raw('SELECT idUzytkownik, Imie, Nazwisko, Email, '
                                                 'ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba')
     context = {"uzytkownicy": lista_uzytkownikow}
     return render(request, 'store/generate_report.html', context)
 
+def generate_warehouse(request):
+    context = {}
+    return render(request, 'store/generate_warehouse.html', context)
+
+def generate_orders(request):
+    context = {}
+    return render(request, 'store/generate_order.html', context)
 
 def managements(request):
     context = {}

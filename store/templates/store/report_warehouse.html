@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reports</title>
+    <title>Zamowienia magazynu</title>
 <style>
     button{
   width: 80px;
@@ -35,32 +35,48 @@
     </tr>
 </table>
 
-
-<h2>Raport klienci</h2>
+<h2>Raport zamowienia magazynu</h2>
 
 <h3>Zakres dat:</h3>
 
 <label class="container">Tydzien
-  <input type="radio" checked="checked" name="radio">
+  <input type="radio" checked="checked" name="date">
   <span class="checkmark"></span>
 </label>
 
 <label class="container">Miesiac
-  <input type="radio" name="radio">
+  <input type="radio" name="date">
   <span class="checkmark"></span>
 </label>
 
 <label class="container">3 Miesiace
-  <input type="radio" name="radio">
+  <input type="radio" name="date">
   <span class="checkmark"></span>
 </label>
 
 <label class="container">Rok
-  <input type="radio" name="radio">
+  <input type="radio" name="date">
   <span class="checkmark"></span>
 </label>
 
-<form action='actionUrl' method='GET'>
+<h3>Zakres kwot:</h3>
+
+<label class="container">0-100
+  <input type="radio" checked="checked" name="amount">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">100-500
+  <input type="radio" name="amount">
+  <span class="checkmark"></span>
+</label>
+
+<label class="container">>500
+  <input type="radio" name="amount">
+  <span class="checkmark"></span>
+</label>
+
+<form action='generateWR' method='GET'>
 <button type="submit">Generuj raport!</button>
 </form>
 
