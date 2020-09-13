@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>STORE</title>
-<style>
-    button{
-  width: 100px;
-  height: 40px;
-  object-fit: none;
-  object-position: 50% 50%;
-}
-</style>
 </head>
 <body>
-<h3>You are in Store</h3>
+    <table id="product_table" border="1" width="600"></table>
+    <script type="text/javascript">
+        var products = {{products_json|safe}};
+    </script>
+    {% load static %}
+    <script src="{% static 'store/Cart.js' %}" type="text/javascript"></script>
+    <form action=./zamow method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="cart" name="cart"/>
+        <button id="zamow" name="zamow">Złóż zamówienie</button>
+    </form>
+    {% load static %}
+    <script src="{% static 'store/SubmitCart.js' %}" type="text/javascript"></script>
 </body>
 </html>

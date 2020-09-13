@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazyn</title>
+    {% load static %}
+    <script src="{% static 'store/sorttable.js' %}" type="text/javascript"></script>
+
+</head>
+<body>
+    <h1>Magazyn</h1>
+    <table>
+        <tr>
+            <td>
+                <form action='./magazyn' method='GET'>
+                    <button type="submit">Magazyn</button>
+                </form>
+            </td>
+            <td>
+                <form action='./zamowienia_klientow' method='GET'>
+                    <button type="submit">Zamowienia</button>
+                </form>
+            </td>
+            <td>
+                <form action='./zamowienia_magazynu' method='GET'>
+                    <button type="submit">Zamowienia magazynu</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <table border="1" width="600" class="sortable">
+        <thead>
+        <tr>
+            <th>Id produktu</th>
+            <th>Nazwa</th>
+            <th>Kategoria</th>
+            <th>Producent</th>
+            <th>Ilosc na magazynie</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td>{{ product.idProdukt }}</td>
+                <td>{{ product.produktNazwa }}</td>
+                <td>{{ product.kategoriaNazwa }}</td>
+                <td>{{ product.producentNazwa }}</td>
+                <td>{{ product.ilosc }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
