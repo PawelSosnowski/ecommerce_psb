@@ -13,6 +13,7 @@ from .models import Magazyn
 from .models import Zamowienie
 from .models import ZamowieniaProdukty
 from .models import PodsumowanieZamowienMagazynu
+from .models import Store
 
 
 def reports(request):
@@ -92,7 +93,7 @@ def zamowienia_magazynu(request):
 
 
 def store(request):
-    products = Magazyn.objects.all()
+    products = Store.objects.all()
     products_json = serializers.serialize('json', products)
     context = {'products': products, 'products_json': products_json}
     return render(request, 'store/store.html', context)
