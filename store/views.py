@@ -15,6 +15,7 @@ from .models import ZamowieniaProdukty
 from .models import PodsumowanieZamowienMagazynu
 from .models import RaportMagazynu
 from .models import RaportKlienci
+from .models import RaportZamowienia
 from .models import Store
 
 
@@ -45,7 +46,8 @@ def generate_warehouse(request):
     return render(request, 'store/generate_warehouse.html', context)
 
 def generate_orders(request):
-    context = {}
+    raport_zamowienia = RaportZamowienia.objects.raw('SELECT * FROM raport_zamowienia_v')
+    context = {'raport_zamowienia':raport_zamowienia}
     return render(request, 'store/generate_order.html', context)
 
 def managements(request):

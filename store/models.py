@@ -157,6 +157,21 @@ class RaportKlienci(models.Model):
         managed = True
         db_table = 'raport_klienci_v'
 
+
+class RaportZamowienia(models.Model):
+    id=models.IntegerField(db_column='idZamowienia', primary_key=True)
+    kategoria=models.CharField(db_column='kategoria', max_length=45, blank=True, null=True)
+    produkt=models.CharField(db_column='produkt', max_length=45, blank=True, null=True)
+    liczbasztuk=models.IntegerField(db_column='liczbasztuk', blank=True, null=True)
+    cena=models.FloatField(db_column='cena', blank=True, null=True)
+    producent=models.CharField(db_column='nazwa', max_length=45, blank=True, null=True)
+    przychod=models.FloatField(db_column='przychod', blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'raport_zamowienia_v'
+
+
 class PodsumowanieZamowienMagazynu(models.Model):
     idZamowienia = models.ForeignKey(ZamowienieMagazynu, models.DO_NOTHING, db_column='idZamowienia', primary_key=True)
     nrZamowienia = models.IntegerField(db_column='nrZamowienia')
