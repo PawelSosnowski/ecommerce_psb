@@ -14,6 +14,6 @@ urlpatterns = [
     path('management/magazyn', views.magazyn, name="magazyn"),
     path('management/zamowienia_klientow', views.zamowienia_klientow, name="zamowienia_klientow"),
     path('management/zamowienia_magazynu', views.zamowienia_magazynu, name="zamowienia_magazynu"),
-    path('reports/actionUrl', views.generate_raports, name="generate_reports")
+    path('reports/generate_reports', views.generate_raports, name="generate_reports")
 ]
 

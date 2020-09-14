@@ -14,6 +14,7 @@ from .models import Zamowienie
 from .models import ZamowieniaProdukty
 from .models import PodsumowanieZamowienMagazynu
 from .models import Store
+from .models import UserReportRecord
 
 
 def reports(request):
@@ -21,32 +22,63 @@ def reports(request):
     # output = ', '.join([p.nazwa for p in lista_producentow])
     return render(request, 'store/reports.html')
 
+
 def reports_orders(request):
     # lista_producentow = Producent.objects.order_by('idproducent')
     # output = ', '.join([p.nazwa for p in lista_producentow])
     return render(request, 'store/report_order.html')
 
+
 def reports_warehouse(request):
     # lista_producentow = Producent.objects.order_by('idproducent')
     # output = ', '.join([p.nazwa for p in lista_producentow])
-    return render(request,'store/report_warehouse.html')
+    return render(request, 'store/report_warehouse.html')
 
+
+@csrf_protect
 def generate_raports(request):
-    lista_uzytkownikow = Uzytkownik.objects.raw('''SELECT idUzytkownik, Imie, Nazwisko, Email, 
-                                                ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba''')
-def generate_raports(request):
-    lista_uzytkownikow = Uzytkownik.objects.raw('SELECT idUzytkownik, Imie, Nazwisko, Email, '
-                                                'ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba')
+    if request.method == 'POST':
+        time_str = ''
+        czas = request.POST['czas']
+        if czas == 'tydzien':
+            time_str = '1 WEEK'
+        elif czas == 'miesiac':
+            time_str = '1 MONTH'
+        elif czas == 'kwartal':
+            time_str = '3 MONTH'
+        elif czas == 'rok':
+            time_str = '1 YEAR'
+
+    query = '''SELECT
+                uzytkownik.idUzytkownik,
+                uzytkownik.Login,
+                uzytkownik.Imie,
+                uzytkownik.Nazwisko,
+                uzytkownik.Email,
+                COUNT(zamowienie.idZamowienia) AS LiczbaZamowien
+                    FROM
+                uzytkownik
+                    JOIN
+                zamowienie ON zamowienie.idSkladajacegoUzytkownika = uzytkownik.idUzytkownik
+                    WHERE
+                zamowienie.DataZlozenia > date_sub(CURDATE(), INTERVAL ''' + time_str + ''' )
+                GROUP BY
+                    uzytkownik.idUzytkownik
+            '''
+    lista_uzytkownikow = UserReportRecord.objects.raw(query)
     context = {"uzytkownicy": lista_uzytkownikow}
     return render(request, 'store/generate_report.html', context)
+
 
 def generate_warehouse(request):
     context = {}
     return render(request, 'store/generate_warehouse.html', context)
 
+
 def generate_orders(request):
     context = {}
     return render(request, 'store/generate_order.html', context)
+
 
 def managements(request):
     context = {}

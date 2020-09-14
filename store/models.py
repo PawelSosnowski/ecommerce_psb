@@ -157,3 +157,13 @@ class Store(models.Model):
     class Meta:
         managed = False
         db_table = 'store_v'
+
+
+class UserReportRecord(models.Model):
+    iduzytkownik = models.IntegerField(db_column='idUzytkownik', primary_key=True)
+    login = models.CharField(db_column='Login', max_length=45, blank=True, null=True)
+    imie = models.CharField(db_column='Imie', max_length=45, blank=True, null=True)
+    nazwisko = models.CharField(db_column='Nazwisko', max_length=45, blank=True, null=True)
+    email = models.CharField(db_column='Email', max_length=45, blank=True, null=True)
+    liczbaZamowien = models.IntegerField(db_column='LiczbaZamowien')
+
