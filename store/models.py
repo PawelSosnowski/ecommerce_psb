@@ -166,3 +166,16 @@ class PodsumowanieZamowienMagazynu(models.Model):
     class Meta:
         managed = False
         db_table = 'podsumowanie_zamowien_magazynu_v'
+
+
+class Store(models.Model):
+    idProdukt = models.IntegerField(db_column='idProdukt', primary_key=True)
+    produktCena = models.FloatField(db_column='produktCena')
+    produktNazwa = models.CharField(db_column='produktNazwa', max_length=45, blank=True, null=True)
+    kategoriaNazwa = models.CharField(db_column='kategoriaNazwa', max_length=45, blank=True, null=True)
+    producentNazwa = models.CharField(db_column='producentNazwa', max_length=45, blank=True, null=True)
+    ilosc = models.IntegerField(db_column='ilosc', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'store_v'
