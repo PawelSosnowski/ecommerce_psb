@@ -39,30 +39,17 @@
 <h2>Raport klienci</h2>
 
 <h3>Zakres dat:</h3>
-
-<label class="container">Tydzien
-  <input type="radio" checked="checked" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<label class="container">Miesiac
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<label class="container">3 Miesiace
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<label class="container">Rok
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<form action='actionUrl' method='GET'>
-<button type="submit">Generuj raport!</button>
+<form action="generate_reports" method="POST">
+  {% csrf_token %}
+  <input type="radio" id="tydzien" name="czas" value="tydzien" checked="checked">
+  <label for="tydzien">Tydzien</label><br>
+  <input type="radio" id="miesiac" name="czas" value="miesiac">
+  <label for="miesiac">Miesiac</label><br>
+  <input type="radio" id="kwartal" name="czas" value="kwartal">
+  <label for="kwartal">Kwartal</label><br>
+  <input type="radio" id="rok" name="czas" value="rok">
+  <label for="rok">Rok</label><br>
+  <button type="submit">Generuj raport!</button>
 </form>
-
 </body>
 </html>
