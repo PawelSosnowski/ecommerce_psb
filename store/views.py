@@ -13,7 +13,8 @@ from .models import Magazyn
 from .models import Zamowienie
 from .models import ZamowieniaProdukty
 from .models import PodsumowanieZamowienMagazynu
-
+from .models import RaportMagazynu
+from .models import RaportKlienci
 
 def reports(request):
     # lista_producentow = Producent.objects.order_by('idproducent')
@@ -28,19 +29,16 @@ def reports_orders(request):
 def reports_warehouse(request):
     # lista_producentow = Producent.objects.order_by('idproducent')
     # output = ', '.join([p.nazwa for p in lista_producentow])
-    return render(request,'store/report_warehouse.html')
+    return render(request, 'store/report_warehouse.html')
 
 def generate_raports(request):
-    lista_uzytkownikow = Uzytkownik.objects.raw('''SELECT idUzytkownik, Imie, Nazwisko, Email, 
-                                                ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba''')
-def generate_raports(request):
-    lista_uzytkownikow = Uzytkownik.objects.raw('SELECT idUzytkownik, Imie, Nazwisko, Email, '
-                                                'ifnull(LiczbaZamowien, 0 ) as LiczbaZamowien from v_rklienciliczba')
+    lista_uzytkownikow = RaportKlienci.objects.raw("SELECT * from raport_klienci_v")
     context = {"uzytkownicy": lista_uzytkownikow}
     return render(request, 'store/generate_report.html', context)
 
 def generate_warehouse(request):
-    context = {}
+    raport_magazynu = RaportMagazynu.objects.raw('SELECT * FROM raport_zamowienia_magazynu_v')
+    context = {'raport_magazynu': raport_magazynu}
     return render(request, 'store/generate_warehouse.html', context)
 
 def generate_orders(request):
@@ -50,7 +48,6 @@ def generate_orders(request):
 def managements(request):
     context = {}
     return render(request, 'store/management.html', context)
-
 
 def magazyn(request):
     products = Magazyn.objects.all()
