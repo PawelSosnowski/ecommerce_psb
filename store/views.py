@@ -41,6 +41,7 @@ def reports_warehouse(request):
 
 @csrf_protect
 def generate_raports(request):
+    czas = ''
     if request.method == 'POST':
         czas = request.POST['czas']
 

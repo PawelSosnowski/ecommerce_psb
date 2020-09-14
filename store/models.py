@@ -134,6 +134,7 @@ class Magazyn(models.Model):
         managed = False
         db_table = 'magazyn_v'
 
+
 class RaportMagazynu(models.Model):
     id = models.IntegerField(db_column='id', primary_key=True)
     NrZamowienia = models.IntegerField(db_column='NrZamowienia', blank=True, null=True)
@@ -145,17 +146,15 @@ class RaportMagazynu(models.Model):
         managed = False
         db_table = 'raport_zamowienia_magazynu_v'
 
+
 class RaportKlienci(models.Model):
-    id = models.IntegerField(db_column='id', primary_key=True)
+    id = models.IntegerField(db_column='idUzytkownik', primary_key=True)
     imie = models.CharField(db_column='Imie', max_length=45, blank=True, null=True)
     nazwisko = models.CharField(db_column='Nazwisko', max_length=45, blank=True, null=True)
     email = models.CharField(db_column='Email', max_length=45, blank=True, null=True)
     liczbazamowien = models.IntegerField(db_column='LiczbaZamowien', blank=True, null=True)
-    sumawydatkow = models.FloatField(db_column='suma_wydatkow', blank=True, null=True)
+    wartosczamowien = models.FloatField(db_column='WartoscZamowien', blank=True, null=True)
 
-    class Meta:
-        managed = True
-        db_table = 'raport_klienci_v'
 
 
 class RaportZamowienia(models.Model):
