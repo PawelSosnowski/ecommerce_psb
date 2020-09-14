@@ -142,17 +142,15 @@ class RaportMagazynu(models.Model):
     Imie = models.CharField(db_column='Imie', max_length=45)
 
 
+
 class RaportKlienci(models.Model):
-    id = models.IntegerField(db_column='id', primary_key=True)
+    id = models.IntegerField(db_column='idUzytkownik', primary_key=True)
     imie = models.CharField(db_column='Imie', max_length=45, blank=True, null=True)
     nazwisko = models.CharField(db_column='Nazwisko', max_length=45, blank=True, null=True)
     email = models.CharField(db_column='Email', max_length=45, blank=True, null=True)
     liczbazamowien = models.IntegerField(db_column='LiczbaZamowien', blank=True, null=True)
-    sumawydatkow = models.FloatField(db_column='suma_wydatkow', blank=True, null=True)
+    wartosczamowien = models.FloatField(db_column='WartoscZamowien', blank=True, null=True)
 
-    class Meta:
-        managed = True
-        db_table = 'raport_klienci_v'
 
 
 class RaportZamowienia(models.Model):
@@ -200,4 +198,10 @@ class UserReportRecord(models.Model):
     nazwisko = models.CharField(db_column='Nazwisko', max_length=45, blank=True, null=True)
     email = models.CharField(db_column='Email', max_length=45, blank=True, null=True)
     liczbaZamowien = models.IntegerField(db_column='LiczbaZamowien')
+
+
+class OrderReportRecord(models.Model):
+    nazwa = models.CharField(db_column='Nazwa', max_length=45, primary_key=True)
+    liczbasztuk = models.IntegerField(db_column='LiczbaSztuk')
+    wartosc = models.FloatField(db_column='Wartosc')
 

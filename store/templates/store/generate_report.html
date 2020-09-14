@@ -24,7 +24,7 @@
 <td>{{ record.nazwisko }}</td>
 <td>{{ record.email }}</td>
 <td>{{ record.liczbazamowien }}</td>
-<td>{{ record.sumawydatkow }}</td>
+<td>{{ record.wartosczamowien|floatformat:2 }}</td>
 </tr>
 {% endfor %}
 </table>
