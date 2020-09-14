@@ -134,16 +134,13 @@ class Magazyn(models.Model):
         managed = False
         db_table = 'magazyn_v'
 
+
 class RaportMagazynu(models.Model):
-    id = models.IntegerField(db_column='id', primary_key=True)
-    NrZamowienia = models.IntegerField(db_column='NrZamowienia', blank=True, null=True)
+    NrZamowienia = models.IntegerField(db_column='NrZamowienia', blank=True, primary_key=True)
     DataZlozenia = models.DateTimeField(db_column='DataZlozenia', blank=True, null=True)
     Wartosc = models.FloatField(db_column='Wartosc', blank=True, null=True)
     Imie = models.CharField(db_column='Imie', max_length=45)
 
-    class Meta:
-        managed = False
-        db_table = 'raport_zamowienia_magazynu_v'
 
 class RaportKlienci(models.Model):
     id = models.IntegerField(db_column='id', primary_key=True)

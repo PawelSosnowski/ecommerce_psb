@@ -50,7 +50,20 @@ def generate_raports(request):
 
 
 def generate_warehouse(request):
-    raport_magazynu = RaportMagazynu.objects.raw('SELECT * FROM raport_zamowienia_magazynu_v')
+    czas = 'tydzien'
+    zakres = '0-500'
+    if request.method == 'POST':
+        czas = request.POST['czas']
+        zakres = request.POST['zakres']
+        print(czas, zakres)
+    if zakres == '0-500':
+        zakres = 500
+    elif zakres == '501-1000':
+        zakres = 1000
+    elif zakres == '>1000':
+        zakres = 2000
+
+    raport_magazynu = RaportMagazynu.objects.raw('SELECT * FROM raport_zamowienia_magazynu_v_' + czas + '_' + str(zakres))
     context = {'raport_magazynu': raport_magazynu}
     return render(request, 'store/generate_warehouse.html', context)
 
