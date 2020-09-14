@@ -18,6 +18,7 @@ from .models import RaportKlienci
 from .models import RaportZamowienia
 from .models import Store
 from .models import UserReportRecord
+from .models import OrderReportRecord
 
 
 
@@ -56,15 +57,24 @@ def generate_warehouse(request):
     return render(request, 'store/generate_warehouse.html', context)
 
 
+@csrf_protect
 def generate_orders(request):
-    raport_zamowienia = RaportZamowienia.objects.raw('SELECT * FROM raport_zamowienia_v')
-    context = {'raport_zamowienia':raport_zamowienia}
+    suffix = '_'
+    if request.method == 'POST':
+        suffix += request.POST['grupowanie']
+        suffix += '_'
+        suffix += request.POST['czas']
+
+    raport_zamowienia = OrderReportRecord.objects.raw('SELECT * FROM raport_zamowienia_v' + suffix)
+    print(raport_zamowienia)
+    context = {'raport_zamowienia': raport_zamowienia}
     return render(request, 'store/generate_order.html', context)
 
 
 def managements(request):
     context = {}
     return render(request, 'store/management.html', context)
+
 
 def magazyn(request):
     products = Magazyn.objects.all()

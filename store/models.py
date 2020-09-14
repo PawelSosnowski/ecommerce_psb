@@ -203,3 +203,9 @@ class UserReportRecord(models.Model):
     email = models.CharField(db_column='Email', max_length=45, blank=True, null=True)
     liczbaZamowien = models.IntegerField(db_column='LiczbaZamowien')
 
+
+class OrderReportRecord(models.Model):
+    nazwa = models.CharField(db_column='Nazwa', max_length=45, primary_key=True)
+    liczbasztuk = models.IntegerField(db_column='LiczbaSztuk')
+    wartosc = models.FloatField(db_column='Wartosc')
+

@@ -37,42 +37,26 @@
 
 <h2>Raport zamowienia</h2>
 
-<h3>Zakres dat:</h3>
 
-<label class="container">Tydzien
-  <input type="radio" checked="checked" name="radio">
-  <span class="checkmark"></span>
-</label>
+<form action="generate_orders" method="POST">
+  {% csrf_token %}
+  <h3>Zakres dat:</h3>
+  <input type="radio" id="tydzien" name="czas" value="tydzien" checked="checked">
+  <label for="tydzien">Tydzien</label><br>
+  <input type="radio" id="miesiac" name="czas" value="miesiac">
+  <label for="miesiac">Miesiac</label><br>
+  <input type="radio" id="kwartal" name="czas" value="kwartal">
+  <label for="kwartal">Kwartal</label><br>
+  <input type="radio" id="rok" name="czas" value="rok">
+  <label for="rok">Rok</label><br>
 
-<label class="container">Miesiac
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
+  <h3>Grupuj po:</h3>
+  <input type="radio" id="kategoria" name="grupowanie" value="kategoria" checked="checked">
+  <label for="kategoria">Kategoria</label><br>
+  <input type="radio" id="producent" name="grupowanie" value="producent">
+  <label for="producent">Producent</label><br>
 
-<label class="container">3 Miesiace
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<label class="container">Rok
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
-
-<h3>Grupowanie:</h3>
-
-<label class="container">Kategoria
-  <input type="radio" checked="checked" name="group">
-  <span class="checkmark"></span>
-</label>
-
-<label class="container">Producent
-  <input type="radio" name="group">
-  <span class="checkmark"></span>
-</label>
-
-<form action="generateOrders" method='GET'>
-<button type="submit">Generuj raport!</button>
+  <button type="submit">Generuj raport!</button>
 </form>
 
 </body>
