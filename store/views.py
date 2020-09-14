@@ -13,8 +13,12 @@ from .models import Magazyn
 from .models import Zamowienie
 from .models import ZamowieniaProdukty
 from .models import PodsumowanieZamowienMagazynu
+from .models import RaportMagazynu
+from .models import RaportKlienci
+from .models import RaportZamowienia
 from .models import Store
 from .models import UserReportRecord
+
 
 
 def reports(request):
@@ -38,52 +42,28 @@ def reports_warehouse(request):
 @csrf_protect
 def generate_raports(request):
     if request.method == 'POST':
-        time_str = ''
         czas = request.POST['czas']
-        if czas == 'tydzien':
-            time_str = '1 WEEK'
-        elif czas == 'miesiac':
-            time_str = '1 MONTH'
-        elif czas == 'kwartal':
-            time_str = '3 MONTH'
-        elif czas == 'rok':
-            time_str = '1 YEAR'
 
-    query = '''SELECT
-                uzytkownik.idUzytkownik,
-                uzytkownik.Login,
-                uzytkownik.Imie,
-                uzytkownik.Nazwisko,
-                uzytkownik.Email,
-                COUNT(zamowienie.idZamowienia) AS LiczbaZamowien
-                    FROM
-                uzytkownik
-                    JOIN
-                zamowienie ON zamowienie.idSkladajacegoUzytkownika = uzytkownik.idUzytkownik
-                    WHERE
-                zamowienie.DataZlozenia > date_sub(CURDATE(), INTERVAL ''' + time_str + ''' )
-                GROUP BY
-                    uzytkownik.idUzytkownik
-            '''
-    lista_uzytkownikow = UserReportRecord.objects.raw(query)
+    lista_uzytkownikow = RaportKlienci.objects.raw("SELECT * from raport_klienci_v_" + czas)
     context = {"uzytkownicy": lista_uzytkownikow}
     return render(request, 'store/generate_report.html', context)
 
 
 def generate_warehouse(request):
-    context = {}
+    raport_magazynu = RaportMagazynu.objects.raw('SELECT * FROM raport_zamowienia_magazynu_v')
+    context = {'raport_magazynu': raport_magazynu}
     return render(request, 'store/generate_warehouse.html', context)
 
 
 def generate_orders(request):
-    context = {}
+    raport_zamowienia = RaportZamowienia.objects.raw('SELECT * FROM raport_zamowienia_v')
+    context = {'raport_zamowienia':raport_zamowienia}
     return render(request, 'store/generate_order.html', context)
 
 
 def managements(request):
     context = {}
     return render(request, 'store/management.html', context)
-
 
 def magazyn(request):
     products = Magazyn.objects.all()
